@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="author" content="Uzair Zafar">
+    <meta name="description" content="Team Project">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a href="index.html"><img src="logo2.png" alt="Online Book Exchange Logo" id="logoimage"></a>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Contact Us</h1>
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea class="form-control" id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <div class="alert alert-success" id="successAlert" style="display: none;">
+            <strong>Success!</strong> Your message has been sent successfully.
+        </div>
+        <div class="alert alert-danger" id="errorAlert" style="display: none;">
+            <strong>Error!</strong> There was an error sending your message. Please try again later.
+        </div>
+    </div>
+
+    <!-- Bootstrap JS scripts (optional) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        $(document).ready(function () {
+            $("#contactForm").submit(function (e) {
+                e.preventDefault();
+
+                // Simulate sending the form data (you can replace this with your actual backend code)
+                setTimeout(function () {
+                    $("#successAlert").fadeIn();
+                    $("#contactForm")[0].reset();
+                }, 1000);
+
+                // You can add error handling here for a real implementation
+            });
+        });
+    </script>
+</body>
+
+</html>
