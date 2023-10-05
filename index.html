@@ -96,15 +96,23 @@
     <!-- <img src="book2.jpg" class="img-fluid" alt="..." id="cover"> -->
     <div>
         <br>
-        <h2 id="feature">Featured Books </h2>
-        <button value="Post an Ad" class="btn btn-primary" id="myButton">Post an Ad</button>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <h2 id="feature">Featured Books </h2>
+                </div>
+                <div class="col-6 col-md-4">
+                    <a class="btn btn-primary btn-small" href="listing.html" role="button">Post an ad</a>
+                </div>
+            </div>
+        </div>
         <br><br>
 
     </div>
    
     <div class="container">
         <br>
-        <div class="row" id="booksDisplay"></div>
+        <div class="card-deck" id="bookList"></div>
     </div>
     <br><br>
 
@@ -149,6 +157,59 @@
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="booklists.js"></script>
 
+    <script>
+        let params = new URLSearchParams(window.location.search);
+        fetch(window.location.origin+'/api/books/?' + params.toString())
+          .then(response => {
+            return response.json()})
+          .then(data => {
+            const bookList = document.getElementById('bookList');
+            
+            data.forEach(book => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+
+                const cardBody = document.createElement('div');
+                cardBody.classList.add('card-body');
+                
+                const cardTitle = document.createElement('h5');
+                cardTitle.classList.add('card-title');
+                cardTitle.textContent = book.title;
+                
+                const cardAuthor = document.createElement('p');
+                cardAuthor.classList.add('card-text');
+                cardAuthor.textContent = book.author;
+
+                const cardCover = document.createElement('img');
+                cardCover.classList.add('card-img-top');
+                cardCover.src = book.image;
+
+                const cardPrice = document.createElement('p');
+                cardPrice.classList.add('card-text');
+                cardPrice.textContent = book.price;
+
+                const atag = document.createElement('a');
+                atag.classList.add('btn', 'btn-primary');
+                atag.href = `book.html?bookId=${book.id}`;
+                atag.textContent = 'View Details';
+
+                cardBody.appendChild(cardTitle);
+                cardBody.appendChild(cardAuthor);
+                cardBody.appendChild(cardPrice);
+                cardBody.appendChild(cardCover);
+                cardBody.appendChild(atag);
+
+                // Append card body to card
+                card.appendChild(cardBody);
+
+                // Append card to the bookList container
+                bookList.appendChild(card);
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+      </script>
 </body>
 
 </html>
