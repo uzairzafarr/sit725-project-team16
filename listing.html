@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="author" description="Su Myat Thiri">
+        <meta name="description" content="Team16 Project">
+        <title>Post Your Books for Sale</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        
+    </head>
+
+    <body>
+        <header>
+            <div class="logo"></div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a href="index.html" class="mr-3"><img src="logo2.png" alt="Online Book Exchange Logo" id="logoimage"></a>
+
+
+            <div  id="search">
+                <form class="form-inline">
+                    <input class="form-control" type="search" placeholder="Search by title &amp; author" aria-label="Search">              
+                </form>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select Book Categroy
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Fiction</a>
+                            <a class="dropdown-item" href="#">History</a>
+                            <a class="dropdown-item" href="#">Motivations</a>
+                            <a class="dropdown-item" href="#">Audio Books</a>
+
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="btn btn-danger" href="login.html">Create Account</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <img src="book2.jpg" class="img-fluid" alt="..." id="cover">
+
+    <div class="container">
+        <h1 class="text-center mt-5">Post Your Books for Sale</h1>
+        <form class="container-fluid" id="bookForm" enctype="multipart/form-data">
+            <div class="row form-group ">
+                <div class="col-lg-6 mx-auto">
+                    <div class="mb-4">
+                        <label class="form-label" for="title">Book Title:</label>
+                        <input class="form-control" type="text" id="title" name="title" placeholder="Enter book title here" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label" for="author">Author:</label>
+                        <input class="form-control" type="text" id="author" name="author" placeholder="Enter author name here" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label" for="description">Description:</label>
+                        <input class="form-control" type="text" id="description" name="description" rows="5" placeholder="Enter your book description here" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label" for="isbn">ISBN:</label>
+                        <input class="form-control" type="number" id="isbn" name="isbn" placeholder="Enter ISBN here" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label" for="condition">Condition:</label>
+                        <select class="selectpicker form-control" name="condition" id="condition" data-style="btn-selectpicker" required>
+                            <option value="new">New</option>
+                            <option value="used">Used</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label" for="price">Price:</label>
+                        <input class="form-control" type="number" id="price" name="price" placeholder="Match your price with other sellers!" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label" for="image">Book Cover:</label>
+                        <input class="form-control" type="file" id="image" name="image" placeholder="Upload your book image here" required>
+                    </div>
+                </div>
+            </div>
+       
+            <div class="row form-block flex-column flex-sm-row">
+                <div class="col text-left test-sm-start">
+                    <a class="btn btn-secondary text-muted" href="index.html">Cancel</a>
+                </div>
+                <div class="col text-right test-sm-start">
+                    <button type="submit" class="btn btn-primary" onclick="">Submit</button>
+                </div>
+            </div>
+        </form>
+
+       
+    </div>
+
+    <script>
+        document.getElementById('bookForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var formData = new FormData();
+            formData.append('title', document.getElementById('title').value);
+            formData.append('author', document.getElementById('author').value);
+            formData.append('description', document.getElementById('description').value);
+            formData.append('isbn', document.getElementById('isbn').value);
+            formData.append('condition', document.getElementById('condition').value);
+            formData.append('price', document.getElementById('price').value);
+            formData.append('image', document.getElementById('image').files[0]);
+
+            console.log(formData);
+
+            fetch('/api/book', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        })
+    </script>
+
+    <footer class="footer">
+        <div class="container" id="footcontainer">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Contact Us</h4>
+                    <p> Team 16</p>
+                    <p>Email: deakin@bookexchange.com</p>
+                </div>
+
+                <div class="col-md-6">
+                    <h4>Follow Us</h4>
+                    <a href="www.facebook.com" class="btn btn-social-icon">Facebook<i
+                            class="bi bi-facebook"></i></a><br>
+                    <a href="www.twitter.com" class="btn btn-social-icon">Twitter</a>
+                </div>
+            </div>
+        </div>
+        <p id="copyrigth">&copy; 2023 - Team 16 - SIT719</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    </body>
+</html>
