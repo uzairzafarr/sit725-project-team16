@@ -68,7 +68,7 @@
     
     
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
+    
     <ul class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -79,7 +79,7 @@
         <div class="carousel-item active">
             <img src="book2.jpg" class="img-fluid" alt="..." id="cover">
         </div>
-        <!-- Add additional slides here -->
+      
         <div class="carousel-item">
             <img src="book1.jpg" class="img-fluid" alt="..." id="cover">
         </div>
@@ -191,7 +191,7 @@
                 const atag = document.createElement('a');
                 atag.classList.add('btn', 'btn-primary');
                 atag.href = `book.html?bookId=${book.id}`;
-                atag.textContent = 'View Details';
+                atag.textContent = 'Add to Cart';
 
                 cardBody.appendChild(cardTitle);
                 cardBody.appendChild(cardAuthor);

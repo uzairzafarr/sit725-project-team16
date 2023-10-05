@@ -5,9 +5,12 @@ const BookController = require('./controllers/bookController');
 const multer = require('multer');
 const upload = multer({dest: './uploads'});
 
-const url = `mongodb+srv://${process.env.MONGO_USERNAME}:${encodeURIComponent(
-  process.env.MONGO_PASSWORD
-)}@cluster0.0faqfif.mongodb.net/?retryWrites=true&w=majority`;
+const url = 'mongodb+srv://sumyat:tUNOOeG31Nz8qEEH@cluster0.0faqfif.mongodb.net/?retryWrites=true&w=majority';
+
+// `mongodb+srv://${process.env.MONGO_USERNAME}:${encodeURIComponent(
+//   process.env.MONGO_PASSWORD
+// )}@cluster0.0faqfif.mongodb.net/?retryWrites=true&w=majority`;
+
 
 main().catch((err) => console.log(err));
 
